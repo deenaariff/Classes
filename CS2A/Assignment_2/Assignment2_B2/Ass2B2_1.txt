@@ -1,12 +1,18 @@
-#include <iostream> 
+// Assignment: 2B #2 
+// Developer: Deen Aariff
+// Foothill ID: 20208433
+// Creation Date: 7/2/2015
+// Description: Error Analysis of Sterling's Application using traditional formula and logarithmic approach 
+
+/*------------------------------- Main Method 1 ----------------------------------*/
+
+include <iostream> 
 #include <cmath> 
 using namespace std;
 
 int main() {
-	
 	cout << "Family Name: Aariff" << "\n";
 	cout << "My Foothill Id is: " << 20208433 << "\n";
-
 	// table headers
 	cout << "n         n!          Stirling's Approx           Error\n";
         cout << "--------------------------------------------------------\n";
@@ -23,7 +29,16 @@ int main() {
 		double error = 100.0 * ((nFactorial - stirlingApprox) / nFactorial); // calculate percent error
 		cout << n << "            " << nFactorial << "  	    " << stirlingApprox << " 	      " << error << "%\n"; // print values 
 	}	
+	return 0;
+}
 
+/*------------------------------- Main Method 2 ----------------------------------*/
+
+include <iostream> 
+#include <cmath> 
+using namespace std;
+
+int main() {
 	cout << "Family Name: Aariff" << "\n";
 	cout << "My Foothill Id is: " << 20208433 << "\n";
 
@@ -43,7 +58,6 @@ int main() {
 		double error = 100.0 * ((logNFactorial - stirlingLogApprox) / logNFactorial); // calculate percent error
 		cout << n << "   	   " << logNFactorial << "   	  	" << stirlingLogApprox << "      	 " << error << "%\n"; // print values 
 	}
-
 	return 0;
 }
 
@@ -367,3 +381,4 @@ n         log n!         nLog(n) - n          Error
 300   	   inf   	  	1411.13      	 nan%
 
 ----------------------------------------------------------*/
+
