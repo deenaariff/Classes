@@ -5,10 +5,11 @@ using namespace std;
 
 int main() {
     // define names of ingredients and nutrients
-    string ingredients [] = {"Cowpeas"};
+    string ingredients [] = {"Cowpeas","Cinnamon"};
     string nutrients [] = {"Calories", "Fiber", "Sugars", "Saturated Fat"};
-    // array for amount of each ingredient
+    // array for amount of each ingredient and totals of each nutrition element
     int amount [5];
+    int totals [5];
     // nutrition values for nutrition types (index correspond to ingredient)
     const double NUTRITION [][sizeof(ingredients)] = {
         {200}, // Calories 
@@ -16,10 +17,8 @@ int main() {
         {5.7}, // Sugars
         {0.2}, // Saturated Fat
     };
-    // totals of each nutrition element
-    int totals [5];
     // populate amounts (n) 
-    for (int i=0; i <= sizeof(ingredients); i++) {
+    for (int i=0; i < sizeof(ingredients); i++) {
          cout << "How many grams of: " << ingredients[i] << "?\n";	 
          cin>>amount[i];
          cin.ignore();
