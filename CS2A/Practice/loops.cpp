@@ -38,10 +38,11 @@ int main () {
 		else if (num > 0) {
 			eExp *= M_E;
 		}
-		else if (eExp == 0) {
+		if (eExp == 0) {
 			eExp = M_E;
 		}
 	}
 	cout << "e^" << num << " is " << eExp << "\n";
+	cout << "C-Math value is: " << pow(M_E,num) << "\n";
 	return 0;	
 }

@@ -1,7 +1,15 @@
+// Assign 3A
+// Deen Aariff
+// Foothil ID: 20208433
+// Creation Date: 07/07/2015
+// Description: Recipe Program
+
 #include <iostream>
 #include <string>
 #include <sstream>
 using namespace std;
+
+//------------ INPUT  --------------
 
 // main client --------------------------------------------------------
 int main()
@@ -154,7 +162,6 @@ int main()
    totalSugars += userInputInt * (FOOD_5_SUGARS_P100G/100.);
 
    // user input serving number
-
    int servings;
    cout << "How many servings will you prepare " << SERVING_PARAM << ": " ;
    cin >> userInputStr; 
@@ -179,6 +186,8 @@ int main()
  
    return 0;
 }
+
+//--------------------- OUTPUT --------------------
 
 /*---------------------  RUN 1 --------------------------
 
@@ -281,5 +290,6 @@ int main()
  ERROR: The input did not fall within the desired paramaters
 
  ---------------------------------------------------------*/
+
 
 
