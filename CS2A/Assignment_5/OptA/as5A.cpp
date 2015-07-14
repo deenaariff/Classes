@@ -11,20 +11,18 @@ char getKeyLetter() {
 
 // return String to be analyzed from User Input
 string getString() {
-    string String;
+    string theString;
     cout << "Enter a string to analyze: ";
-    cin >> String;
-    return String; 
+    cin >> theString;
+    return theString; 
 }
 
 // returns string with key letter replaced with "-"
 string maskLetter(string theString, char keyLetter) {
-    cout << "initialized";
     string masked;
-    for (int i = 0; i < sizeof(theString)-1; i++) {
-	 cout << "working for i:" << i;
+    for (int i = 0; i < (theString.length()); i++) {
          if (theString.at(i) == keyLetter)
-		masked += '-';
+		masked += "-";
          else 
                masked += theString.at(i);
     }
@@ -34,18 +32,18 @@ string maskLetter(string theString, char keyLetter) {
 // returns string with key letter deleted 
 string removeLetter(string theString, char keyLetter) {
     string removed;
-    for (int i = 0; i <sizeof(theString); i++) {
+    for (int i = 0; i < theString.length(); i++) {
          if (theString.at(i) != keyLetter)
-             removed.at(i) += theString.at(i);
+             removed += theString.at(i);
     }
     return removed;
 }
 
 // counts instances of key letter in string 
 int countKey(string theString, char keyLetter) {
-    int count;
-    for (int i = 0; i < sizeof(theString); i++) {
-        if (theString.at(i) == keyLetter ) 
+    int count = 0;
+    for (int i = 0; i < theString.length(); i++) {
+        if (theString.at(i) == keyLetter) 
               count++;
     }
     return count;
@@ -55,9 +53,13 @@ int countKey(string theString, char keyLetter) {
 int main () {
     char keyLetter = getKeyLetter();
     string myString = getString();
-    cout << maskLetter(myString,keyLetter);
-    cout << removeLetter(myString,keyLetter);
-    cout << countKey(myString,keyLetter); 
+    cout << "String: " << myString << "\n";
+    string masked = maskLetter(myString,keyLetter);
+    string removed = removeLetter(myString,keyLetter);
+    int count = countKey(myString,keyLetter); 
+    cout << "Replaced: " << masked << endl;
+    cout << "Removed: " << removed << endl;
+    cout << "Count: " << count << endl;
     return 0;
 }
 

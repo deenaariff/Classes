@@ -1,5 +1,4 @@
-//
-Assignment: 4A
+// Assignment: 4A
 // Author: Deen Aariff
 // Foothill ID: 20208433
 // Creation Date: 07/09/15
@@ -179,4 +178,5 @@ int main () {
  Your Choice: S
  
  --------------------------------------------------------------------*/
+
 
