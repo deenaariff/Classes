@@ -3,10 +3,10 @@ using namespace std;
 
 // return Key Letter from User Input
 char getKeyLetter() {  
-    char letter;
+    char keyLetter;
     cout << "Enter a key letter: ";
-    cin >> letter;
-    return letter; 
+    cin >> keyLetter;
+    return keyLetter; 
 }
 
 // return String to be analyzed from User Input
@@ -19,12 +19,14 @@ string getString() {
 
 // returns string with key letter replaced with "-"
 string maskLetter(string theString, char keyLetter) {
+    cout << "initialized";
     string masked;
-    for (int i = 0; i < sizeof(theString); i++) {
+    for (int i = 0; i < sizeof(theString)-1; i++) {
+	 cout << "working for i:" << i;
          if (theString.at(i) == keyLetter)
-		masked.at(i) = '-';
+		masked += '-';
          else 
-               masked.at(i) = theString.at(i);
+               masked += theString.at(i);
     }
     return masked;
 }
@@ -34,7 +36,7 @@ string removeLetter(string theString, char keyLetter) {
     string removed;
     for (int i = 0; i <sizeof(theString); i++) {
          if (theString.at(i) != keyLetter)
-             removed.at(i) = theString.at(i);
+             removed.at(i) += theString.at(i);
     }
     return removed;
 }
@@ -46,11 +48,16 @@ int countKey(string theString, char keyLetter) {
         if (theString.at(i) == keyLetter ) 
               count++;
     }
-    return 0;
+    return count;
 }
 
 // main method for output 
 int main () {
+    char keyLetter = getKeyLetter();
+    string myString = getString();
+    cout << maskLetter(myString,keyLetter);
+    cout << removeLetter(myString,keyLetter);
+    cout << countKey(myString,keyLetter); 
     return 0;
 }
 
