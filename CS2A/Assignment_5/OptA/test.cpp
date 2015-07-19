@@ -1,9 +1,3 @@
-// Assignment: 5A
-// Name: Deen Aariff
-// ID: 20208433
-// Creation Date: 07/14/2015
-// Description: String Modification
-
 #include <iostream>
 #include <string>
 using namespace std;
@@ -26,7 +20,7 @@ char getKeyLetter() {
 string getString() {
     string theString;
     while(true) {
-        cout << "Enter a string to analyze (4 or more characters): ";
+        cout << "Enter a string to analyze: ";
         getline(cin,theString);
         if (theString.length() >= 4) 
              break;

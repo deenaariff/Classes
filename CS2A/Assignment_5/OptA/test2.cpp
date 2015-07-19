@@ -1,9 +1,3 @@
-// Assignment: 5A
-// Name: Deen Aariff
-// ID: 20208433
-// Creation Date: 07/14/2015
-// Description: String Modification
-
 #include <iostream>
 #include <string>
 using namespace std;
@@ -84,3 +78,73 @@ int main () {
     return 0;
 }
 
+/*------------------------ RUN 1 -----------------------------
+
+Enter a key character: hello
+ERROR: Please enter one character
+Enter a key character: h
+Enter a string to analyze: Hi there
+
+String with 'h' replaced:
+ Hi t-ere
+String with 'h' removed:
+ Hi tere
+Instances of 'h' in original string:
+ 1
+
+------------------------- RUN 2 ------------------------------
+
+Enter a key character: c
+Enter a string to analyze (4 or more characters): crazy cats do crazy things
+
+String with 'c' replaced:
+ -razy -ats do -razy things
+String with 'c' removed:
+ razy ats do razy things
+Instances of 'c' in original string:
+ 3
+ 
+------------------------- RUN 3 ------------------------------
+
+Enter a key character: a
+Enter a string to analyze: axe 
+ERROR: Enter a string that is longer than 4 letters 
+Enter a string to analyze (4 or more characters): the axe man scared the community
+
+String with 'a' replaced:
+ the -xe m-n sc-red the community
+String with 'a' removed:
+ the xe mn scred the community
+Instances of 'a' in original string:
+ 3
+
+------------------------- RUN 4 ------------------------------
+
+Enter a key character: g
+Enter a string to analyze (4 or more characters): go go go go go gina!
+
+String with 'g' replaced:
+ -o -o -o -o -o -ina!
+String with 'g' removed:
+ o o o o o ina!
+Instances of 'g' in original string:
+ 6
+
+
+------------------------- RUN 5 -----------------------------
+
+Enter a key character: fish feed on other frenzied fish
+ERROR: Please enter one character
+Enter a key character: 
+ERROR: Please enter one character
+Enter a key character: f
+Enter a string to analyze (4 or more characters): fish feed o other frenzied fish
+
+String with 'f' replaced:
+ -ish -eed o other -renzied -ish
+String with 'f' removed:
+ ish eed o other renzied ish
+Instances of 'f' in original string:
+ 4
+
+------------------------------------------------------------*/ 

@@ -7,3 +7,13 @@
 //
 
 #include "test.h"
+#include <iostream>
+using namespace std;
+
+int main () {
+
+int result = 1+2 * 3+4;
+cout << result << endl;
+	
+return 0;
+}
