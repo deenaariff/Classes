@@ -14,4 +14,5 @@ public:
     double getSumOfTerms(int n); 
 };
 
+
 #endif

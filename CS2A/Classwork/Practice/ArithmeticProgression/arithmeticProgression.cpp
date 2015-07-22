@@ -32,6 +32,14 @@ double ArithmeticProgression::getSumOfTerms (int n) {
     return sum;
 }
 
+ostream& operator<<(ostream& os, const ArithmeticProgression& ap) {
+    os << "The Arithmetic Progression you want is:\n"
+       <<"\tFirst term: " << ap.getfirstTerm() << endl
+       <<"\tDiff: " << ap.getDiff() << endl
+       << "So there!\n";
+    return os;
+}   
+
 int main () {
     ArithmeticProgression test (1,1);
     ArithmeticProgression prog = test;

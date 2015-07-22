@@ -1,9 +1,3 @@
-// Assignment: 6A
-// Author: Deen Aariff
-// Foothill ID: 20208433
-// Creation Date: 07/21/15
-// Description: Number Guessing Game Simple
-
 #include <iostream>
 #include <sstream>
 #include <time.h>
@@ -39,7 +33,7 @@ int main () {
     // Numeric and Error Literals
     const int MIN = 1;
     const int MAX = 25; 
-    const string ERROR1 = "ERR: Only the equals comparator (=) is supported.\n";
+    const string ERROR1 = "\nERR: Only the equals comparator (=) is supported.\n\n";
     const string QUIT_SUCCESS = "Program ended with code: 0\n";
     const string QUIT_USER = "Program ended with code: 1\n";  
     // Vars  
@@ -47,6 +41,7 @@ int main () {
     int guesses, guess = 0;
     char comparator;
     int randomNum = randomGenerate(MIN,MAX); // Call Random Number Generator
+    cout << "Random " << randomNum << endl;
 
     // Logic 
     cout << HEADER1 << HEADER2 << HEADER3 << HEADER4; // Print Header
@@ -65,7 +60,7 @@ int main () {
          else if (userInput.empty()) // if string is empty (restart loop)
              continue; 
          else if (!checkComparator(comparator)) // if comparator not "=" (ERROR)
-             cerr << ERROR1; 
+             cerr << ERROR1;
          else if (isEquals(guess, randomNum)) {  // Test guess value 
              cout << "You accomplished it with " << guesses << " tries!\n";
              cout << QUIT_SUCCESS << endl;
@@ -76,42 +71,3 @@ int main () {
     } while (true);
     return 0;
 }
-
-/*--------------------- RUN 1 -------------------------------
-
-Welcome to Deen’s Number Guessing Game.
-I have a number in mind. Can you guess it?
-In your input below, enter the comparator
-followed by your guess. E.g. '=15?'
-Take a guess at the number (1-25): =1?
-Nopes. Try Again
-
-Take a guess at the number (1-25): =6?
-Nopes. Try Again
-
-Take a guess at the number (1-25): =9?
-Nopes. Try Again
-
-Take a guess at the number (1-25): =11?
-You accomplished it with 4 tries!
-Program ended with code: 0
-
----------------------- RUN 2 -------------------------------
-
-Welcome to Deen’s Number Guessing Game.
-I have a number in mind. Can you guess it?
-In your input below, enter the comparator
-followed by your guess. E.g. '=15?'
-Take a guess at the number (1-25): 11
-ERR: Only the equals comparator (=) is supported.
-Take a guess at the number (1-25): =11?
-Nopes. Try Again
-
-Take a guess at the number (1-25): 
-Take a guess at the number (1-25): 
-Take a guess at the number (1-25): 2?
-ERR: Only the equals comparator (=) is supported.
-Take a guess at the number (1-25): Q
-Program ended with code: 1
-
-------------------------------------------------------------*/
