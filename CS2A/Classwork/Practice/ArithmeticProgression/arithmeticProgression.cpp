@@ -11,6 +11,16 @@ ArithmeticProgression::ArithmeticProgression (double first, double d) {
 // "this means current object, -> derefferences an objects (takes conents of pointer and pass it to that variable)
 };
 
+double ArithmeticProgression::setFirstterm(double term) {
+    firstTerm = term;
+    return true;
+}
+
+bool ArithemticPrpgression::setDiff(double D) {
+   
+   return true; 
+}
+
 double ArithmeticProgression::getNthTerm(int n) {
     double nthTerm = firstTerm + diff*n;
     return nthTerm;

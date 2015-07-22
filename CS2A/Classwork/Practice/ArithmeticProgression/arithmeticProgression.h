@@ -5,7 +5,7 @@
 
 class ArithmeticProgression {
 private:
-    double firstTerm;
+    static double firstTerm = 1;
     double diff;
 
 public: 
