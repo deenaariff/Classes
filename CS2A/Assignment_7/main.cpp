@@ -1,16 +1,25 @@
 // TODO: The usual header stuff goes here. Don’t forget to include your Game.h
 #include "Game.h"
+#include "Game.cpp"
 
 // TODO: Insert declarations of the main()’s helper functions here.
+
+void doConfirmGuess(game,comparator,guess) {
+}
+
+void doDenyGuess (game,compartor, guess) {
+}
 
 int main(int argc, const char *argv[]) {
    char comparator;
    int guess;
    string userInput;
+   const int MAX_GUESSES; 
+   game.setPlayerName(getPlayerName());
 
    // TODO: Something is missing here, fill it in.
-
-   cout <<"Welcome to the Foothill Number Guessing game, " <<playerName <<".\n"
+   
+   cout <<"Welcome to Deen's Number Guessing game, " <<playerName <<".\n"
         <<"I have a non-negative number < "<< MAX_SECRET << " in mind\n"
         <<"and you have to guess it using <, > or =\n\n";
     

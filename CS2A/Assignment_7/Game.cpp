@@ -39,8 +39,11 @@ bool Game::isSecretMoreThan(int guess) {
    return (guess < secretNumber)? true: false;
 }
 
-bool Game::iswon() {
-   return true;
+bool Game::isSecretEqualTo(int guess) {
+   return (guess == secretNumber)? true : false;
+}
+
+bool Game::isWon() {
+   return hasBeenWon;
 {
     
-}
