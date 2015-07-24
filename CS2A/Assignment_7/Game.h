@@ -12,6 +12,7 @@ using namespace std;
  
 class Game {
 private:
+   int maxSecret;
    int secretNumber; // Neither getter nor setter
    string currentPlayerName;
    bool hasBeenWon;
@@ -20,21 +21,27 @@ private:
 public:
    Game(string playerName, int maxSecret);
 
+   // Guess Boundary Accessors
+   int getMaxSecret (void) const {return maxSecret;}
+   void setMaxSecret (int const maxValue) {maxSecret = maxValue;}
+
+   // hasBeenWon Accessors
    void setHasBeenWon(bool status);
 
+   // playerName Accessors
    string getPlayerName(void) const;
    void setPlayerName(string playerName);
 
+   // numGuesses Accessors
    int getNumGuesses(void) const;
    void setNumGuesses(int guesses);
 
-   // DEBUGGER
-   int getSecretNumber (void) const {return secretNumber;}
-
+   // Comparator Methods
    bool isSecretLessThan(int guess);
    bool isSecretMoreThan(int guess);
    bool isSecretEqualTo(int guess);
  
+   // returns if user has won
    bool isWon(void) const;
 };
 

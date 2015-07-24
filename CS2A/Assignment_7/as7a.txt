@@ -1,0 +1,401 @@
+// Assignment: 6A
+// Author: Deen Aariff
+// Foothill ID: 20208433
+// Creation Date: 07/21/15
+// Description: Number Guessing Game Simple
+
+/*------------------------------- main.cpp ---------------------------------*/
+
+// DONE: The usual header stuff goes here. Don’t forget to include your Game.h
+#include <iostream>
+#include "Game.h"
+#include "Game.cpp"
+#include <sstream>
+using namespace std;
+
+// DONE: Insert declarations of the main()’s helper functions here.
+
+// Set Game as Being won and increment number of guesses
+void doConfirmGuess(char comparator, int guess) {
+    cout << "You asked if " << comparator << " " << guess << ": ";
+    cout << "YES!\n";
+}
+
+// Game continues and increment number of guesses 
+void doDenyGuess (char comparator, int guess) {
+    cout << "You asked if " << comparator << " " << guess << ": ";
+    cout << "NO!\n";
+}
+
+// Return Player Name from User Input 
+string getPlayerName() {
+   string name = "";
+   while (name.length() == 0) {
+       cout << "Hello playa, whatcha name? ";
+       getline(cin, name);
+   }
+   return name;
+}
+ 
+/**
+* Returns the user's guess - the comparator and the number guessed in
+* the parameters passed by reference. It returns true if these values
+* were able to be filled in, and false if the user entered Q or q, signaling
+* his/her intent to end the game.
+*/
+// DONE: The following signature is WRONG. FIX IT!
+bool getGuess(Game game, char &comparator, int &guess) {
+   string guessStr;
+   const string QUIT_USER = "Exit Code: 1\n";
+
+   while(true) {
+       istringstream iss;
+       cout << game.getNumGuesses() + 1 << ". "
+            << "Enter your guess using <, =  or >, or enter Q to quit: ";
+       getline(cin, guessStr);
+       iss.str(guessStr);
+       iss >> comparator >> guess; 
+
+       if (guessStr.length() == 0)
+           continue;
+
+       if (tolower(guessStr[0]) == 'q') {
+           cout << QUIT_USER;
+           return false;
+       }
+
+       if (comparator == '<' || comparator == '>' || comparator == '=')
+           break;
+       else {
+           cerr <<"Invalid comparator or value. Here's an example guess: "
+                <<"  < 12345\n";
+       }
+   }
+   return true;
+}
+
+// Main Logic
+int main(int argc, const char *argv[]) {
+   const int MAX_GUESSES = 30; // maximum number of guesses
+   const int MAX_SECRET = 1000000; // maximum value of secret number
+   string playerName = getPlayerName();
+   Game game = Game(playerName, MAX_SECRET);
+   char comparator;
+   int guess,guesses = 0;
+   string userInput;
+
+   // DONE: Something is missing here, fill it in.
+   
+   cout <<"Welcome to Deen's Number Guessing game, " <<playerName <<".\n"
+        <<"I have a non-negative number < "<< MAX_SECRET << " in mind\n"
+        <<"and you have to guess it using <, > or =\n\n";
+  
+   while ((game.getNumGuesses() < MAX_GUESSES) && !game.isWon()) {
+       if (!getGuess(game, comparator, guess))
+           break;
+       
+       // Increment Guesses # and Set Class Object Value
+       game.setNumGuesses(++guesses); 
+
+       if ((comparator == '<' && game.isSecretLessThan(guess)) ||
+           (comparator == '>' && game.isSecretMoreThan(guess)) ||
+           (comparator == '=' && game.isSecretEqualTo(guess))) {
+           if (guesses < MAX_GUESSES)
+               doConfirmGuess(comparator, guess);
+       } else {
+           doDenyGuess(comparator, guess);
+       }
+   }
+   
+   if (game.isWon()) {
+       cout << "\nCongratulations, " << playerName << "! "
+           << "You have won the game. You took " << game.getNumGuesses()
+           <<(game.getNumGuesses() > 1? " guesses.\n" : " guess.\n");
+   } else if (!(comparator == 'q' || comparator == 'Q')) {
+      cout << "\nHaha " << playerName << " you lose! " 
+           << "You took " << game.getNumGuesses()
+           << (game.getNumGuesses() > 1? " guesses" : " guess")
+           << ", which is more than the allowed amount.\n";
+   }
+   return 0;
+}
+ 
+
+
+// DONE: Fill in any other helper methods used, but not defined or delcared.
+
+
+/*------------------------------- Game.cpp ---------------------------------*/
+
+
+//  Game.cpp
+//  GuessIt.v1
+//
+//  Created by Anand Venkataraman on 7/20/14.
+//  Copyright (c) 2014 Foothill College. All rights reserved.
+//
+#include "Game.h"
+#include <time.h>
+ 
+/**
+* The constructor sets the current player's name and selects a random
+* non-negative less than maxSecret
+*/
+Game::Game(string playerName, int maxValue) {
+   maxSecret = maxValue;
+   currentPlayerName = playerName;
+   for (int i = 0; i < (time(0)%60); i++) { // iterate random function from sec
+      secretNumber = rand() % maxSecret + 1;
+   }
+   numGuesses = 0;
+   hasBeenWon = false;
+}
+ 
+// DONE: You must flesh out the rest of this file with all the missing methods
+
+void Game::setHasBeenWon(bool status) {
+   hasBeenWon = status; 
+}
+
+string Game::getPlayerName() const {
+   return currentPlayerName;
+}
+
+void Game::setPlayerName(string playerName) {
+   currentPlayerName = playerName; 
+}
+
+int Game::getNumGuesses() const {
+   return numGuesses;
+}
+
+void Game::setNumGuesses(int guesses) {
+   numGuesses = guesses;
+}
+
+bool Game::isSecretLessThan(int guess) {
+   return (guess > secretNumber)? true : false; 
+}
+
+bool Game::isSecretMoreThan(int guess) {
+   return (guess < secretNumber)? true: false;
+}
+
+bool Game::isSecretEqualTo(int guess) {
+   if (guess == secretNumber) {
+      hasBeenWon = true;
+      return true;
+   }
+   else 
+      return false;
+}
+
+bool Game::isWon() const {
+   return hasBeenWon;
+}
+
+/*------------------------------- Game.h ---------------------------------*/
+
+
+//  Game.h
+//  GuessIt.v1
+//
+//  Created by Anand Venkataraman on 7/20/14.
+//  Copyright (c) 2014 Foothill College. All rights reserved.
+//
+#ifndef __GuessIt_v1__Game__
+#define __GuessIt_v1__Game__
+ 
+#include <iostream>
+using namespace std;
+ 
+class Game {
+private:
+   int maxSecret;
+   int secretNumber; // Neither getter nor setter
+   string currentPlayerName;
+   bool hasBeenWon;
+   int numGuesses;
+
+public:
+   Game(string playerName, int maxSecret);
+
+   // Guess Boundary Accessors
+   int getMaxSecret (void) const {return maxSecret;}
+   void setMaxSecret (int const maxValue) {maxSecret = maxValue;}
+
+   // hasBeenWon Accessors
+   void setHasBeenWon(bool status);
+
+   // playerName Accessors
+   string getPlayerName(void) const;
+   void setPlayerName(string playerName);
+
+   // numGuesses Accessors
+   int getNumGuesses(void) const;
+   void setNumGuesses(int guesses);
+
+   // Comparator Methods
+   bool isSecretLessThan(int guess);
+   bool isSecretMoreThan(int guess);
+   bool isSecretEqualTo(int guess);
+ 
+   // returns if user has won
+   bool isWon(void) const;
+};
+
+#endif /* defined(__GuessIt_v1__Game__) */
+
+/*--------------------------------- RUN 1  -------------------------------- 
+
+Hello playa, whatcha name? Deen 
+Welcome to Deen's Number Guessing game, Deen .
+I have a non-negative number < 1000000 in mind
+and you have to guess it using <, > or =
+
+1. Enter your guess using <, =  or >, or enter Q to quit: >500000
+You asked if > 500000: NO!
+2. Enter your guess using <, =  or >, or enter Q to quit: >250000
+You asked if > 250000: NO!
+3. Enter your guess using <, =  or >, or enter Q to quit: >125000
+You asked if > 125000: NO!
+4. Enter your guess using <, =  or >, or enter Q to quit: >60000
+You asked if > 60000: NO!
+5. Enter your guess using <, =  or >, or enter Q to quit: >0
+You asked if > 0: YES!
+6. Enter your guess using <, =  or >, or enter Q to quit: >30000
+You asked if > 30000: NO!
+7. Enter your guess using <, =  or >, or enter Q to quit: >15000
+You asked if > 15000: NO!
+8. Enter your guess using <, =  or >, or enter Q to quit: >100
+You asked if > 100: YES!
+9. Enter your guess using <, =  or >, or enter Q to quit: >75000
+You asked if > 75000: NO!
+10. Enter your guess using <, =  or >, or enter Q to quit: >7500
+You asked if > 7500: YES!
+11. Enter your guess using <, =  or >, or enter Q to quit: >12000
+You asked if > 12000: NO!
+12. Enter your guess using <, =  or >, or enter Q to quit: >10000
+You asked if > 10000: YES!
+13. Enter your guess using <, =  or >, or enter Q to quit: >11000
+You asked if > 11000: NO!
+14. Enter your guess using <, =  or >, or enter Q to quit: >10500
+You asked if > 10500: YES!
+15. Enter your guess using <, =  or >, or enter Q to quit: >10750
+You asked if > 10750: NO!
+16. Enter your guess using <, =  or >, or enter Q to quit: >10600
+You asked if > 10600: YES!
+17. Enter your guess using <, =  or >, or enter Q to quit: >10700
+You asked if > 10700: NO!
+18. Enter your guess using <, =  or >, or enter Q to quit: >10650
+You asked if > 10650: YES!
+19. Enter your guess using <, =  or >, or enter Q to quit: >10675
+You asked if > 10675: NO!
+20. Enter your guess using <, =  or >, or enter Q to quit: >10660
+You asked if > 10660: YES!
+21. Enter your guess using <, =  or >, or enter Q to quit: >10680
+You asked if > 10680: NO!
+22. Enter your guess using <, =  or >, or enter Q to quit: >10668
+You asked if > 10668: YES!
+23. Enter your guess using <, =  or >, or enter Q to quit: >10670
+You asked if > 10670: YES!
+24. Enter your guess using <, =  or >, or enter Q to quit: >10672
+You asked if > 10672: YES!
+25. Enter your guess using <, =  or >, or enter Q to quit: =10673
+You asked if = 10673: YES!
+
+Congratulations, Deen ! You have won the game. You took 25 guesses.
+
+-------------------------------- RUN 2 ----------------------------------
+
+Hello playa, whatcha name? Spiderman
+Welcome to Deen's Number Guessing game, Spiderman.
+I have a non-negative number < 1000000 in mind
+and you have to guess it using <, > or =
+
+1. Enter your guess using <, =  or >, or enter Q to quit: > 500000
+You asked if > 500000: YES!
+2. Enter your guess using <, =  or >, or enter Q to quit: > 750000
+You asked if > 750000: NO!
+3. Enter your guess using <, =  or >, or enter Q to quit: 
+3. Enter your guess using <, =  or >, or enter Q to quit: 
+3. Enter your guess using <, =  or >, or enter Q to quit: a848484
+Invalid comparator. Here's an example guess:   < 12345
+3. Enter your guess using <, =  or >, or enter Q to quit: 494944
+Invalid comparator. Here's an example guess:   < 12345
+3. Enter your guess using <, =  or >, or enter Q to quit: Q
+Exit Code: 1
+
+--------------------------------- RUN 3 ---------------------------------
+
+Hello playa, whatcha name? Tiger
+Welcome to Deen's Number Guessing game, Tiger.
+I have a non-negative number < 1000000 in mind
+and you have to guess it using <, > or =
+
+1. Enter your guess using <, =  or >, or enter Q to quit: >3
+You asked if > 3: YES!
+2. Enter your guess using <, =  or >, or enter Q to quit: >4
+You asked if > 4: YES!
+3. Enter your guess using <, =  or >, or enter Q to quit: >5
+You asked if > 5: YES!
+4. Enter your guess using <, =  or >, or enter Q to quit: >6
+You asked if > 6: YES!
+5. Enter your guess using <, =  or >, or enter Q to quit: >7
+You asked if > 7: YES!
+6. Enter your guess using <, =  or >, or enter Q to quit: >8
+You asked if > 8: YES!
+7. Enter your guess using <, =  or >, or enter Q to quit: >0
+You asked if > 0: YES!
+8. Enter your guess using <, =  or >, or enter Q to quit: >9
+You asked if > 9: YES!
+9. Enter your guess using <, =  or >, or enter Q to quit: >10
+You asked if > 10: YES!
+10. Enter your guess using <, =  or >, or enter Q to quit: >11
+You asked if > 11: YES!
+11. Enter your guess using <, =  or >, or enter Q to quit: >12
+You asked if > 12: YES!
+12. Enter your guess using <, =  or >, or enter Q to quit: >14
+You asked if > 14: YES!
+13. Enter your guess using <, =  or >, or enter Q to quit: >15
+You asked if > 15: YES!
+14. Enter your guess using <, =  or >, or enter Q to quit: .19
+Invalid comparator or value. Here's an example guess:   < 12345
+14. Enter your guess using <, =  or >, or enter Q to quit: >19
+You asked if > 19: YES!
+15. Enter your guess using <, =  or >, or enter Q to quit: >30
+You asked if > 30: YES!
+16. Enter your guess using <, =  or >, or enter Q to quit: >39
+You asked if > 39: YES!
+17. Enter your guess using <, =  or >, or enter Q to quit: >39
+You asked if > 39: YES!
+18. Enter your guess using <, =  or >, or enter Q to quit: >39
+You asked if > 39: YES!
+19. Enter your guess using <, =  or >, or enter Q to quit: >39
+You asked if > 39: YES!
+20. Enter your guess using <, =  or >, or enter Q to quit: >32
+You asked if > 32: YES!
+21. Enter your guess using <, =  or >, or enter Q to quit: >28
+You asked if > 28: YES!
+22. Enter your guess using <, =  or >, or enter Q to quit: >293
+You asked if > 293: YES!
+23. Enter your guess using <, =  or >, or enter Q to quit: >302
+You asked if > 302: YES!
+24. Enter your guess using <, =  or >, or enter Q to quit: >3940
+You asked if > 3940: YES!
+25. Enter your guess using <, =  or >, or enter Q to quit: >9240
+You asked if > 9240: YES!
+26. Enter your guess using <, =  or >, or enter Q to quit: >2390
+You asked if > 2390: YES!
+27. Enter your guess using <, =  or >, or enter Q to quit: >239203
+You asked if > 239203: YES!
+28. Enter your guess using <, =  or >, or enter Q to quit: >390
+You asked if > 390: YES!
+29. Enter your guess using <, =  or >, or enter Q to quit: >390
+You asked if > 390: YES!
+30. Enter your guess using <, =  or >, or enter Q to quit: >32
+
+Haha Tiger you lose! You took 30 guesses, which is more than the allowed amount.
+
+------------------------------------------------------------------------*/
+

@@ -1,3 +1,9 @@
+// Assignment: 6A
+// Author: Deen Aariff
+// Foothill ID: 20208433
+// Creation Date: 07/21/15
+// Description: Number Guessing Game Simple
+
 // TODO: The usual header stuff goes here. Don’t forget to include your Game.h
 #include <iostream>
 #include "Game.h"
@@ -8,18 +14,15 @@ using namespace std;
 // TODO: Insert declarations of the main()’s helper functions here.
 
 // Set Game as Being won and increment number of guesses
-void doConfirmGuess(Game &game, bool status) {
-    int guesses = game.getNumGuesses();
-    game.setNumGuesses(++guesses);
-    game.setHasBeenWon(status);
+void doConfirmGuess(char comparator, int guess) {
+    cout << "You asked if " << comparator << " " << guess << ": ";
+    cout << "YES!\n";
 }
 
 // Game continues and increment number of guesses 
-void doDenyGuess (Game game, bool status) {
-    cout << "Try Again!\n";
-    int guesses = game.getNumGuesses();
-    game.setNumGuesses(++guesses);
-    game.setHasBeenWon(status);
+void doDenyGuess (char comparator, int guess) {
+    cout << "You asked if " << comparator << " " << guess << ": ";
+    cout << "NO!\n";
 }
 
 // Return Player Name from User Input 
@@ -41,37 +44,42 @@ string getPlayerName() {
 // TODO: The following signature is WRONG. FIX IT!
 bool getGuess(Game game, char &comparator, int &guess) {
    string guessStr;
+   const string QUIT_USER = "Exit Code: 1\n";
 
    while(true) {
        istringstream iss;
        cout << game.getNumGuesses() + 1 << ". "
             << "Enter your guess using <, =  or >, or enter Q to quit: ";
        getline(cin, guessStr);
+       iss.str(guessStr);
+       iss >> comparator >> guess; 
+
        if (guessStr.length() == 0)
            continue;
 
-       if (tolower(guessStr[0]) == 'q')
+       if (tolower(guessStr[0]) == 'q') {
+           cout << QUIT_USER;
            return false;
+       }
 
-       iss.str(guessStr);
-       iss >> comparator >> guess; 
        if (comparator == '<' || comparator == '>' || comparator == '=')
            break;
        else {
-           cerr <<"Invalid comparator. Here's an example guess: "
+           cerr <<"Invalid comparator or value. Here's an example guess: "
                 <<"  < 12345\n";
        }
    }
    return true;
 }
 
+// Main Logic
 int main(int argc, const char *argv[]) {
-   const int MAX_SECRET = 5;
+   const int MAX_GUESSES = 30; // maximum number of guesses
+   const int MAX_SECRET = 1000000; // maximum value of secret number
    string playerName = getPlayerName();
    Game game = Game(playerName, MAX_SECRET);
-   cout << "DEBUG: Guess is: " << game.getSecretNumber() << endl;
    char comparator;
-   int guess = 0;
+   int guess,guesses = 0;
    string userInput;
 
    // TODO: Something is missing here, fill it in.
@@ -80,33 +88,32 @@ int main(int argc, const char *argv[]) {
         <<"I have a non-negative number < "<< MAX_SECRET << " in mind\n"
         <<"and you have to guess it using <, > or =\n\n";
   
-   while ((game.getNumGuesses() < MAX_SECRET) && !game.isWon()) {
-       // istringstream iss;
-       // getline(cin, userInput);
-       // iss << comparator << guess; 
+   while ((game.getNumGuesses() < MAX_GUESSES) && !game.isWon()) {
        if (!getGuess(game, comparator, guess))
            break;
- 
+       
+       // Increment Guesses # and Set Class Object Value
+       game.setNumGuesses(++guesses); 
+
        if ((comparator == '<' && game.isSecretLessThan(guess)) ||
            (comparator == '>' && game.isSecretMoreThan(guess)) ||
            (comparator == '=' && game.isSecretEqualTo(guess))) {
-           cout << "What. What. \n";
-           doConfirmGuess(game, true);
-           break;
+           if (guesses < MAX_GUESSES)
+               doConfirmGuess(comparator, guess);
        } else {
-           doDenyGuess(game, false);
+           doDenyGuess(comparator, guess);
        }
    }
-
-   cout << game.isWon() << endl;
- 
+   
    if (game.isWon()) {
-       cout << "Congratulations, " << playerName << ". "
-            << "You have won the game. You took " << game.getNumGuesses()
-            <<(game.getNumGuesses() > 1? " guesses.\n" : " guess.\n");
-   } else {
-      cout << "Haha " << playerName << " you lose! " 
-           << "You took " << game.getNumGuesses() << " guesses!\n";
+       cout << "\nCongratulations, " << playerName << "! "
+           << "You have won the game. You took " << game.getNumGuesses()
+           <<(game.getNumGuesses() > 1? " guesses.\n" : " guess.\n");
+   } else if (!(comparator == 'q' || comparator == 'Q')) {
+      cout << "\nHaha " << playerName << " you lose! " 
+           << "You took " << game.getNumGuesses()
+           << (game.getNumGuesses() > 1? " guesses" : " guess")
+           << ", which is more than the allowed amount.\n";
    }
    return 0;
 }

@@ -5,14 +5,18 @@
 //  Copyright (c) 2014 Foothill College. All rights reserved.
 //
 #include "Game.h"
+#include <time.h>
  
 /**
 * The constructor sets the current player's name and selects a random
 * non-negative less than maxSecret
 */
-Game::Game(string playerName, int maxSecret) {
+Game::Game(string playerName, int maxValue) {
+   maxSecret = maxValue;
    currentPlayerName = playerName;
-   secretNumber = arc4random() % maxSecret;
+   for (int i = 0; i < (time(0)%60); i++) { // iterate random function from sec
+      secretNumber = rand() % maxSecret + 1;
+   }
    numGuesses = 0;
    hasBeenWon = false;
 }
@@ -48,7 +52,12 @@ bool Game::isSecretMoreThan(int guess) {
 }
 
 bool Game::isSecretEqualTo(int guess) {
-   return (guess == secretNumber)? true : false;
+   if (guess == secretNumber) {
+      hasBeenWon = true;
+      return true;
+   }
+   else 
+      return false;
 }
 
 bool Game::isWon() const {
