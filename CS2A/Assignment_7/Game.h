@@ -16,13 +16,20 @@ private:
    string currentPlayerName;
    bool hasBeenWon;
    int numGuesses;
+
 public:
    Game(string playerName, int maxSecret);
+
+   void setHasBeenWon(bool status);
 
    string getPlayerName(void) const;
    void setPlayerName(string playerName);
 
    int getNumGuesses(void) const;
+   void setNumGuesses(int guesses);
+
+   // DEBUGGER
+   int getSecretNumber (void) const {return secretNumber;}
 
    bool isSecretLessThan(int guess);
    bool isSecretMoreThan(int guess);
@@ -30,4 +37,5 @@ public:
  
    bool isWon(void) const;
 };
+
 #endif /* defined(__GuessIt_v1__Game__) */

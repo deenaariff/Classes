@@ -1,54 +1,28 @@
 // TODO: The usual header stuff goes here. Don’t forget to include your Game.h
+#include <iostream>
 #include "Game.h"
 #include "Game.cpp"
+#include <sstream>
+using namespace std;
 
 // TODO: Insert declarations of the main()’s helper functions here.
 
-void doConfirmGuess(game,comparator,guess) {
+// Set Game as Being won and increment number of guesses
+void doConfirmGuess(Game &game, bool status) {
+    int guesses = game.getNumGuesses();
+    game.setNumGuesses(++guesses);
+    game.setHasBeenWon(status);
 }
 
-void doDenyGuess (game,compartor, guess) {
+// Game continues and increment number of guesses 
+void doDenyGuess (Game game, bool status) {
+    cout << "Try Again!\n";
+    int guesses = game.getNumGuesses();
+    game.setNumGuesses(++guesses);
+    game.setHasBeenWon(status);
 }
 
-int main(int argc, const char *argv[]) {
-   char comparator;
-   int guess;
-   string userInput;
-   const int MAX_GUESSES; 
-   game.setPlayerName(getPlayerName());
-
-   // TODO: Something is missing here, fill it in.
-   
-   cout <<"Welcome to Deen's Number Guessing game, " <<playerName <<".\n"
-        <<"I have a non-negative number < "<< MAX_SECRET << " in mind\n"
-        <<"and you have to guess it using <, > or =\n\n";
-    
-   while (game.getNumGuesses() < MAX_GUESSES && !game.isWon()) {
-       istringstream iss;
-       getline(cin, userInput);
-       iss << comparator << guess; 
-       if (!getGuess(game, comparator, guess))
-           break;
- 
-       if ((comparator == '<' && game.isSecretLessThan(guess)) ||
-           (comparator == '>' && game.isSecretMoreThan(guess)) ||
-           (comparator == '=' && game.isSecretEqualTo(guess))) {
-           doConfirmGuess(game, comparator, guess);
-       } else {
-           doDenyGuess(game, comparator, guess);
-       }
-   }
- 
-   if (game.isWon()) {
-       cout << "Congratulations, " << game.getPlayerName() << ". "
-            << "You have won the game. You took " << game.getNumGuesses()
-            <<(game.getNumGuesses() > 1? " guesses.\n" : " guess.\n");
-   } else {
-       // TODO: Fill this in
-   }
-   return 0;
-}
- 
+// Return Player Name from User Input 
 string getPlayerName() {
    string name = "";
    while (name.length() == 0) {
@@ -65,10 +39,11 @@ string getPlayerName() {
 * his/her intent to end the game.
 */
 // TODO: The following signature is WRONG. FIX IT!
-bool getGuess(const Game game, char comparator, int guess) {
+bool getGuess(Game game, char &comparator, int &guess) {
    string guessStr;
- 
+
    while(true) {
+       istringstream iss;
        cout << game.getNumGuesses() + 1 << ". "
             << "Enter your guess using <, =  or >, or enter Q to quit: ";
        getline(cin, guessStr);
@@ -78,14 +53,64 @@ bool getGuess(const Game game, char comparator, int guess) {
        if (tolower(guessStr[0]) == 'q')
            return false;
 
-       istringstream(guessStr) >>comparator >>guess;
+       iss.str(guessStr);
+       iss >> comparator >> guess; 
        if (comparator == '<' || comparator == '>' || comparator == '=')
            break;
-
-       cerr <<"Invalid comparator. Here's an example guess: "
-            <<"  < 12345\n";
+       else {
+           cerr <<"Invalid comparator. Here's an example guess: "
+                <<"  < 12345\n";
+       }
    }
    return true;
 }
+
+int main(int argc, const char *argv[]) {
+   const int MAX_SECRET = 5;
+   string playerName = getPlayerName();
+   Game game = Game(playerName, MAX_SECRET);
+   cout << "DEBUG: Guess is: " << game.getSecretNumber() << endl;
+   char comparator;
+   int guess = 0;
+   string userInput;
+
+   // TODO: Something is missing here, fill it in.
+   
+   cout <<"Welcome to Deen's Number Guessing game, " <<playerName <<".\n"
+        <<"I have a non-negative number < "<< MAX_SECRET << " in mind\n"
+        <<"and you have to guess it using <, > or =\n\n";
+  
+   while ((game.getNumGuesses() < MAX_SECRET) && !game.isWon()) {
+       // istringstream iss;
+       // getline(cin, userInput);
+       // iss << comparator << guess; 
+       if (!getGuess(game, comparator, guess))
+           break;
+ 
+       if ((comparator == '<' && game.isSecretLessThan(guess)) ||
+           (comparator == '>' && game.isSecretMoreThan(guess)) ||
+           (comparator == '=' && game.isSecretEqualTo(guess))) {
+           cout << "What. What. \n";
+           doConfirmGuess(game, true);
+           break;
+       } else {
+           doDenyGuess(game, false);
+       }
+   }
+
+   cout << game.isWon() << endl;
+ 
+   if (game.isWon()) {
+       cout << "Congratulations, " << playerName << ". "
+            << "You have won the game. You took " << game.getNumGuesses()
+            <<(game.getNumGuesses() > 1? " guesses.\n" : " guess.\n");
+   } else {
+      cout << "Haha " << playerName << " you lose! " 
+           << "You took " << game.getNumGuesses() << " guesses!\n";
+   }
+   return 0;
+}
+ 
+
 
 // TODO: Fill in any other helper methods used, but not defined or delcared.

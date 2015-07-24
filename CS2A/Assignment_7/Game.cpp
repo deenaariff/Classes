@@ -19,16 +19,24 @@ Game::Game(string playerName, int maxSecret) {
  
 // TODO: You must flesh out the rest of this file with all the missing methods
 
-string Game::getPlayerName() {
+void Game::setHasBeenWon(bool status) {
+   hasBeenWon = status; 
+}
+
+string Game::getPlayerName() const {
    return currentPlayerName;
 }
 
 void Game::setPlayerName(string playerName) {
-   currentplayerName = playerName; 
+   currentPlayerName = playerName; 
 }
 
-int Game::getNumGuesses() {
+int Game::getNumGuesses() const {
    return numGuesses;
+}
+
+void Game::setNumGuesses(int guesses) {
+   numGuesses = guesses;
 }
 
 bool Game::isSecretLessThan(int guess) {
@@ -43,7 +51,7 @@ bool Game::isSecretEqualTo(int guess) {
    return (guess == secretNumber)? true : false;
 }
 
-bool Game::isWon() {
+bool Game::isWon() const {
    return hasBeenWon;
-{
+}
     
