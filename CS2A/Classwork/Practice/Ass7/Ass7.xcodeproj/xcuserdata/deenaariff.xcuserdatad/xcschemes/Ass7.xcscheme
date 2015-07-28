@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B43DFD1E1B61660400C24526"
-               BuildableName = "Screen"
-               BlueprintName = "Screen"
-               ReferencedContainer = "container:Screen.xcodeproj">
+               BlueprintIdentifier = "B43DFD371B61964B00C24526"
+               BuildableName = "Ass7"
+               BlueprintName = "Ass7"
+               ReferencedContainer = "container:Ass7.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B43DFD1E1B61660400C24526"
-            BuildableName = "Screen"
-            BlueprintName = "Screen"
-            ReferencedContainer = "container:Screen.xcodeproj">
+            BlueprintIdentifier = "B43DFD371B61964B00C24526"
+            BuildableName = "Ass7"
+            BlueprintName = "Ass7"
+            ReferencedContainer = "container:Ass7.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -52,10 +52,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B43DFD1E1B61660400C24526"
-            BuildableName = "Screen"
-            BlueprintName = "Screen"
-            ReferencedContainer = "container:Screen.xcodeproj">
+            BlueprintIdentifier = "B43DFD371B61964B00C24526"
+            BuildableName = "Ass7"
+            BlueprintName = "Ass7"
+            ReferencedContainer = "container:Ass7.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -71,10 +71,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B43DFD1E1B61660400C24526"
-            BuildableName = "Screen"
-            BlueprintName = "Screen"
-            ReferencedContainer = "container:Screen.xcodeproj">
+            BlueprintIdentifier = "B43DFD371B61964B00C24526"
+            BuildableName = "Ass7"
+            BlueprintName = "Ass7"
+            ReferencedContainer = "container:Ass7.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -12,3 +12,16 @@
 #include <stdio.h>
 
 #endif /* defined(__Screen__Rectangle__) */
+
+class Rectangle {
+private:
+   int topLeftX, topLeftY;
+   int width, height;
+
+public:
+   Rectangle(int x, int y, int w, int h); 
+   void getTopLeft(int& topLeftX, int& topLeftY);
+   void getDimensions();
+   
+
+};

@@ -13,7 +13,7 @@ using namespace std;
 int randomGenerate (int min, int max) {
     int randomNum = min; 
     time_t secondsElapsed = time(0); // time-dependent iteration value up to 59
-    for (int i = 0; i < (secondsElapsed % 60); i++) {
+    for (int i = 0; i < (secondsElapsed); i++) {
         randomNum = rand() % max + min; 
     }
     return randomNum;
@@ -62,7 +62,7 @@ int main () {
              cout << QUIT_USER <<endl;
              break;
          }
-         else if (userInput.empty()) // if string is empty (restart loop)
+         else if (userInput.empty() ) // if string is empty (restart loop)
              continue; 
          else if (!checkComparator(comparator)) // if comparator not "=" (ERROR)
              cerr << ERROR1; 
@@ -77,41 +77,3 @@ int main () {
     return 0;
 }
 
-/*--------------------- RUN 1 -------------------------------
-
-Welcome to Deen’s Number Guessing Game.
-I have a number in mind. Can you guess it?
-In your input below, enter the comparator
-followed by your guess. E.g. '=15?'
-Take a guess at the number (1-25): =1?
-Nopes. Try Again
-
-Take a guess at the number (1-25): =6?
-Nopes. Try Again
-
-Take a guess at the number (1-25): =9?
-Nopes. Try Again
-
-Take a guess at the number (1-25): =11?
-You accomplished it with 4 tries!
-Program ended with code: 0
-
----------------------- RUN 2 -------------------------------
-
-Welcome to Deen’s Number Guessing Game.
-I have a number in mind. Can you guess it?
-In your input below, enter the comparator
-followed by your guess. E.g. '=15?'
-Take a guess at the number (1-25): 11
-ERR: Only the equals comparator (=) is supported.
-Take a guess at the number (1-25): =11?
-Nopes. Try Again
-
-Take a guess at the number (1-25): 
-Take a guess at the number (1-25): 
-Take a guess at the number (1-25): 2?
-ERR: Only the equals comparator (=) is supported.
-Take a guess at the number (1-25): Q
-Program ended with code: 1
-
-------------------------------------------------------------*/

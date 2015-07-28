@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B43DFD231B61660500C24526 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B43DFD221B61660500C24526 /* main.cpp */; };
+		B43DFD2B1B61661C00C24526 /* Screen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B43DFD291B61661C00C24526 /* Screen.cpp */; };
+		B43DFD2E1B61668500C24526 /* Rectangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B43DFD2C1B61668500C24526 /* Rectangle.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +27,10 @@
 /* Begin PBXFileReference section */
 		B43DFD1F1B61660500C24526 /* Screen */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Screen; sourceTree = BUILT_PRODUCTS_DIR; };
 		B43DFD221B61660500C24526 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		B43DFD291B61661C00C24526 /* Screen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Screen.cpp; sourceTree = "<group>"; };
+		B43DFD2A1B61661C00C24526 /* Screen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Screen.h; sourceTree = "<group>"; };
+		B43DFD2C1B61668500C24526 /* Rectangle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rectangle.cpp; sourceTree = "<group>"; };
+		B43DFD2D1B61668500C24526 /* Rectangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rectangle.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,10 @@
 			isa = PBXGroup;
 			children = (
 				B43DFD221B61660500C24526 /* main.cpp */,
+				B43DFD291B61661C00C24526 /* Screen.cpp */,
+				B43DFD2A1B61661C00C24526 /* Screen.h */,
+				B43DFD2C1B61668500C24526 /* Rectangle.cpp */,
+				B43DFD2D1B61668500C24526 /* Rectangle.h */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -119,6 +129,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B43DFD231B61660500C24526 /* main.cpp in Sources */,
+				B43DFD2B1B61661C00C24526 /* Screen.cpp in Sources */,
+				B43DFD2E1B61668500C24526 /* Rectangle.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

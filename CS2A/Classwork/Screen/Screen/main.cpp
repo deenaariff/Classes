@@ -7,9 +7,14 @@
 //
 
 #include <iostream>
+#include "Screen.h"
+#include "Rectangle.h"
+
 
 int main(int argc, const char * argv[]) {
-   // insert code here...
-   std::cout << "Hello, World!\n";
+   Screen myScreen;
+   Rectangle rect1(10, 10, 20, 40);
+   myScreen.draw(rect1);
+   myScreen.stroke();
     return 0;
 }
