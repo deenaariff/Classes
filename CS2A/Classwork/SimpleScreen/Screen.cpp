@@ -14,12 +14,12 @@
  * Actually transfer the screen buffer to the physical screen
  */
 void Screen::stroke() const {
-    for (int y = 0; y < HEIGHT; y++) {
+    for (int y = 0; y <= HEIGHT; y++) {
         for (int x = 0; x < WIDTH; x++) {
             cout << screenBuf[x][y];
         }
+        cout << endl;
     }
-
 }
 
 /**
@@ -31,6 +31,7 @@ void Screen::clear() {
             screenBuf[x][y] = clearChar;
             cout << screenBuf[x][y];
         }
+        cout << endl;
     }
 }
 
@@ -38,7 +39,7 @@ void Screen::clear() {
  * Sets a pixel on screen, if successful, returns 1, else 0
  */
 int Screen::setPixel(int x, int y, char c) {
-    if (x < WIDTH && y < HEIGHT && x >= 0 && y >= 0) {
+    if (x <= WIDTH && y <= HEIGHT && x >= 0 && y >= 0) {
         screenBuf[x][y] = c;
         return 1;
     }
@@ -48,7 +49,7 @@ int Screen::setPixel(int x, int y, char c) {
 /**
  * Draw a rectangle on the screen buffer
  */
-int Screen::draw(const Rectangle& rect) {
+int Screen::drawRectangle(const Rectangle& rect) {
     int rectX, rectY, w, h;
     int totalPixelsSet = 0;
 
@@ -62,10 +63,11 @@ int Screen::draw(const Rectangle& rect) {
     }
 
     // Draw the left and right lines
-    for (int y = rectY; y < rectY + h - 1; y++) {
+    for (int y = rectY; y < rectY + h; y++) {
         totalPixelsSet += setPixel(rectX, y, vertLineChar);
         totalPixelsSet += setPixel(rectX+w, y, vertLineChar);
     }
+
 
     // Set the four corner chars.
     setPixel(rectX, rectY, cornerChar);

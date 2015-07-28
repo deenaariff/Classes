@@ -1,21 +1,31 @@
 #include "Rectangle.h"
 #include <math.h>
+#include <vector>
+#include "Pointer.h"
+#include "Pointer.cpp"
 
-bool Rectangle::isInside (const Point& p, Rectangle rect) {
-	rect.getTopLeft(int topLeftX, int topLeftX);
-    rect.getTopLeft(int height, int width);
-    double x = p -> x;
-    double y = p -> y;
-
-    return ((x > topLeftX && x < topLeftX + width) && (y > topLeftY && y < topLeftY + height)?;
+bool Rectangle::isInside (Pointer& p, Rectangle rect) {
+	int tLX, tLY, height, width;
+	rect.getTopLeft(tLX, tLY);
+    rect.getTopLeft(height, width);
+    int x = p.getX();
+    int y = p.getY();
+    return ((x > tLX && x < tLX + width) && (y > tLX&& y < tLX + height))? true : false;
 }
 
-bool[] isInside (const Point p [], Rectangle rect, bool inside []) {
-	bool truths [p.size()];
+void Rectangle::isInside (vector<Pointer> p, Rectangle rect, bool result []) {
 	for (int i = 0; i < p.size(); i++) {
-		daTruth[i] = isInside(p[i], rect);
+		result[i] = isInside(p[i], rect);
 	}
-	return truths
+
 }
 
+bool Rectangle::isOn ( Pointer& p, Rectangle rect) {
+	int tLX, tLY, height, width;
+	rect.getTopLeft(tLX, tLY);
+    rect.getTopLeft(height, width);
+    int x = p.getX();
+    int y = p.getY();
+    return ((x == tLX || x == tLX + width) && (y == tLY || y == tLY + height))? true : false;
+}
 
