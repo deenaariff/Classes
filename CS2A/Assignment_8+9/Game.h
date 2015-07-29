@@ -19,6 +19,7 @@ using namespace std;
 * the game when MAX_PLAYERS players are in the leaderboard already, the game
 * will reject them (not allow them to play).
 */
+
 class Game {
 public:
     static const int MAX_GUESSES = 50;

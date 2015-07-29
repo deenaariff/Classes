@@ -18,7 +18,47 @@ Player::Player(string name) {
     mostGuesses = leastGuesses = avgGuesses = INT_MAX;
 }
 
-// TODO: Implement all the getters and setters of this class
+// DONE: Implement all the getters and setters of this class
+
+string Player::getPlayerName(void) const {
+	return playerName;
+}
+
+int Player::getNumGamesPlayed(void) const {
+	return numGamesPlayed;
+}
+
+int Player::getMostGuesses(void) const {
+	return mostGuesses;
+}
+
+int Player::getLeastGuesses(void) const {
+	return leastGuesses;
+}
+
+double getAvgGuesses(void) const {
+	return avgGuesses;
+}
+
+void setPlayerName(string name) {
+	playerName = name;
+}
+
+void setNumGamesPlayed(int n) {
+	numGamesPlayed = n;
+}
+
+void setMostGuesses(int n) {
+	mostGuesses = n;
+}
+
+void setLeastGuesses(int n) {
+	leastGuesses = n;
+}
+
+void setAvgGuesses(double x) {
+	avgGuesses = x;
+}
 
 /**
  * The output operator << on the Player data type. It
