@@ -44,20 +44,21 @@ void setPlayerName(string name) {
 	playerName = name;
 }
 
-void setNumGamesPlayed(int n) {
-	numGamesPlayed = n;
+void setNumGamesPlayed(int numGames) {
+	numGamesPlayed = numGames;
 }
 
-void setMostGuesses(int n) {
-	mostGuesses = n;
+void setMostGuesses(int guessesHigh) {
+	mostGuesses = guessesHigh;
 }
 
-void setLeastGuesses(int n) {
-	leastGuesses = n;
+void setLeastGuesses(int guessesLow) {
+	leastGuesses = guessesLow;
 }
 
-void setAvgGuesses(double x) {
-	avgGuesses = x;
+// Uses latest num Guesses to Calculate new Average
+void setAvgGuesses(double numGuesses) {
+	avgGuesses = ((avgGuesses*numGamesPlayed)+numGuesses)/(numGamesPlayed+1);
 }
 
 /**

@@ -32,10 +32,10 @@ public:
     double getAvgGuesses(void) const;
 
     void setPlayerName(string name);
-    void setNumGamesPlayed(int n);
-    void setMostGuesses(int n);
-    void setLeastGuesses(int n);
-    void setAvgGuesses(double x);
+    void setNumGamesPlayed(int numGames);
+    void setMostGuesses(int guessesHigh);
+    void setLeastGuesses(int guessesLow);
+    void setAvgGuesses(double numGuesses);
 };
 
 // We want to pretty print the Player object with << and hence this.
