@@ -19,7 +19,7 @@ int main(int argc, const char * argv[]) {
     Rectangle rect1(10, 10, 20, 40);
 
     myScreen.clear();
-    myScreen.draw(rect1);
+    myScreen.drawRectangle(rect1);
     cout << endl;
     myScreen.stroke();
 
