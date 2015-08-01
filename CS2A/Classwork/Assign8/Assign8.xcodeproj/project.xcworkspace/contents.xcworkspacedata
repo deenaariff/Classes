@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:../../../Assignment_8+9/Player.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:../../../Assignment_8+9/Player.h.gch">
+   </FileRef>
+   <FileRef
+      location = "group:../../../Assignment_8+9/Game.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:../../../Assignment_8+9/Player.h">
+   </FileRef>
+   <FileRef
+      location = "group:../../../Assignment_8+9/main.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:../../../Assignment_8+9/Game.h">
+   </FileRef>
+   <FileRef
+      location = "self:Assign8.xcodeproj">
+   </FileRef>
+</Workspace>

@@ -4,10 +4,13 @@
 // Created by Anand Venkataraman on 7/20/14.
 // Copyright (c) 2014 Foothill College. All rights reserved.
 //
+
 #ifndef __Guessit_v2__Player__
 #define __Guessit_v2__Player__
+
 #include <iostream>
-using namespace std;
+using namespace std;
+
 /**
  * The Player class represents a single player. It keeps track of his or her
  * best score (least number of guesses) worst score (most), number of games
@@ -17,28 +20,28 @@ using namespace std;
 */
 class Player {
 private:
-    string playerName;
-    int numGamesPlayed;
-    int leastGuesses;
-    int mostGuesses;
-    double avgGuesses;  
+    string playerName;
+    int numGamesPlayed;
+    int leastGuesses;
+    int mostGuesses;
+    double avgGuesses;  
 public:
-    Player(string name = ""); // Note optional param and default.
+    Player(string name); // Note optional param and default.
 
-    string getPlayerName(void) const;
-    int getNumGamesPlayed(void) const;
-    int getMostGuesses(void) const;
-    int getLeastGuesses(void) const;
-    double getAvgGuesses(void) const;
+    string getPlayerName(void) const;
+    int getNumGamesPlayed(void) const;
+    int getMostGuesses(void) const;
+    int getLeastGuesses(void) const;
+    double getAvgGuesses(void) const;
 
-    void setPlayerName(string name);
-    void setNumGamesPlayed(int numGames);
-    void setMostGuesses(int guessesHigh);
-    void setLeastGuesses(int guessesLow);
-    void setAvgGuesses(double numGuesses);
-};
+    void setPlayerName(string name);
+    void setNumGamesPlayed(int numGames);
+    void setMostGuesses(int guessesHigh);
+    void setLeastGuesses(int guessesLow);
+    void setAvgGuesses(double numGuesses);
+};
 
 // We want to pretty print the Player object with << and hence this.
-ostream& operator<<(ostream& os, const Player& player);
+ostream& operator<<(ostream& os, const Player& player);
 
 #endif /* defined(__Guessit_v2__Player__) */

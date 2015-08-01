@@ -4,18 +4,19 @@
 // Created by Anand Venkataraman on 7/20/14.
 // Copyright (c) 2014 Foothill College. All rights reserved.
 //
+#include <iostream>
 #include "Player.h"
-#include "Game.h"
 
-using namespace std;
+
+using namespace std;
 
 /**
 * name is an optional param (See the class decl). It defaults to ""
 */
 Player::Player(string name) {
-    playerName = name;
-    numGamesPlayed = 0;
-    mostGuesses = leastGuesses = avgGuesses = INT_MAX;
+    playerName = name;
+    numGamesPlayed = 0;
+    mostGuesses = leastGuesses = avgGuesses = INT_MAX;
 }
 
 // DONE: Implement all the getters and setters of this class
@@ -71,6 +72,6 @@ ostream& operator<<(ostream& os, const Player& player) {
         <<"Guesses: "
         <<player.getAvgGuesses() << " (avg) "
         <<player.getLeastGuesses() << " (best) "
-        <<player.getMostGuesses() << " (worst) "
+        <<player.getMostGuesses() << " (worst) ";
 ;
 }

@@ -4,14 +4,20 @@
 // Created by Anand Venkataraman on 7/20/14.
 // Copyright (c) 2014 Pandamatak. All rights reserved.
 //
+
+#ifndef __GuessIt_v1__Game__
+#define __GuessIt_v1__Game__
+
 #include <iostream>
 #include <sstream>
 #include "Game.h"
+#include "Player.h"
+#include "Player.cpp"
 
-using namespace std;
+using namespace std;
 // Initialize our class statics here. C++ requires it to be done this way.
-int Game::numPlayers = 0;
-Player Game::players[Game::MAX_PLAYERS];
+int Game::numPlayers = 0;
+Player Game::players[Game::MAX_PLAYERS];
 
 /**
 * The constructor sets the current player's name and selects a random
@@ -19,10 +25,10 @@ Player Game::players[Game::MAX_PLAYERS];
 */
 
 Game::Game(string playerName) {
-	currentPlayerName = playerName;
-	secretNumber = arc4random() % Game::MAX_SECRET;
-	numGuesses = 0;
-	hasBeenWon = false;
+	currentPlayerName = playerName;
+	secretNumber = arc4random() % Game::MAX_SECRET;
+	numGuesses = 0;
+	hasBeenWon = false;
 }
 
 //­­­­­­­­­­­­­­­­­­­ Static methods ­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­
@@ -32,16 +38,16 @@ Game::Game(string playerName) {
 * If there is already a player by the given name, simply return true.
 */
 bool Game::addPlayer(string playerName) {
-	for (int i = 0; i < Game::MAX_PLAYERS; i++) {
+	for (int i = 0; i < Game::MAX_PLAYERS; i++) {
 		if (Game::players[i].getPlayerName().empty()) {
-			Game::players[i] = Player(playerName);
-			++Game::numPlayers;
-			return true;
+			Game::players[i] = Player(playerName);
+			++Game::numPlayers;
+			return true;
 		} else if (Game::players[i].getPlayerName().compare(playerName) == 0) {
-			return true; // Already existing player
+			return true; // Already existing player
 		}
 	}
-	return false; // Player limit reached. Couldn't add.
+	return false; // Player limit reached. Couldn't add.
 }
 
 
@@ -62,7 +68,7 @@ bool Game::getPlayerAtRank(int i, Player& player) {
 }
 
 bool avgGuessesComparator(const Player &p1, const Player &p2) {
-	return p1.getAvgGuesses() < p2.getAvgGuesses();
+	return p1.getAvgGuesses() < p2.getAvgGuesses();
 }
 
 /**
@@ -70,11 +76,11 @@ bool avgGuessesComparator(const Player &p1, const Player &p2) {
 * increasing average number of guesses.
 */
 void Game::sortLeaderboard() {
-	sort(Game::players, Game::players + Game::MAX_PLAYERS, avgGuessesComparator);
+	sort(Game::players, Game::players + Game::MAX_PLAYERS, avgGuessesComparator);
 }
 
 int Game::getNumPlayers(void) {
-	return numPlayers;
+	return numPlayers;
 }
 
 /**
@@ -85,13 +91,13 @@ int Game::getNumPlayers(void) {
 * passed to us by reference.
 */
 bool Game::findPlayer(string playerName, Player& player) {
-	for (int i = 0; i < Game::MAX_PLAYERS; i++) {
+	for (int i = 0; i < Game::MAX_PLAYERS; i++) {
 		if (Game::players[i].getPlayerName().compare(playerName) == 0) {
-			player = Game::players[i];
-			return true;
+			player = Game::players[i];
+			return true;
 		}
 	}
-	return false;
+	return false;
 }
 
 /**
@@ -100,7 +106,7 @@ bool Game::findPlayer(string playerName, Player& player) {
 */
 bool Game::updatePlayer(Player& player) {
 	// DONE Fill in this method’s body
-	for (int i = 0; i < GAMME:MAX_PLAYERS; i++) {
+	for (int i = 0; i < GAMME:MAX_PLAYERS; i++) {
 		if (Game::players[i].getPlayerName().compare(player.getPlayerName()) == 0) {
 			Game::players[i] == player; 
 			return true;
@@ -111,19 +117,19 @@ bool Game::updatePlayer(Player& player) {
 
 // ­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­
 string Game::getPlayerName() const {
-	return currentPlayerName;
+	return currentPlayerName;
 }
 
 void Game::setPlayerName(string playerName) {
-	currentPlayerName = playerName;
+	currentPlayerName = playerName;
 }
 
 int Game::getNumGuesses(void) const {
-	return numGuesses;
+	return numGuesses;
 }
 
 bool Game::isWon(void) const {
-	return hasBeenWon;
+	return hasBeenWon;
 }
 
 // ­­­­­­­­­­­­­­­­ Game playing logic ­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­
@@ -136,26 +142,26 @@ bool Game::isWon(void) const {
 * the game.
 */
 bool Game::play() {
-	char cmp;
-	int guess;
+	char cmp;
+	int guess;
 	cout <<"Welcome to the Foothill Number Guessing game, " <<currentPlayerName <<".\n"
 	<<"I have a non­negative number < "<< Game::MAX_SECRET << " in mind\n"
-	<<"and you have to guess it using <, > or =\n\n";
+	<<"and you have to guess it using <, > or =\n\n";
 	while (numGuesses < Game::MAX_GUESSES && !hasBeenWon) {
 		if (!getGuess(cmp, guess))
-			return false;
-		++numGuesses;
-		bool isGuessCorrect;
+			return false;
+		++numGuesses;
+		bool isGuessCorrect;
 		if (cmp == '<')
-			isGuessCorrect = secretNumber < guess;
+			isGuessCorrect = secretNumber < guess;
 		else if (cmp == '>')
-			isGuessCorrect = secretNumber > guess;
+			isGuessCorrect = secretNumber > guess;
 		else if (cmp == '=')
-			hasBeenWon = isGuessCorrect = (secretNumber == guess);
+			hasBeenWon = isGuessCorrect = (secretNumber == guess);
 		cout << "\tIs SECRET " << cmp << " " << guess <<": "
-		<< (isGuessCorrect? "YES!\n" : "NO.\n");
+		<< (isGuessCorrect? "YES!\n" : "NO.\n");
 	}
-	return numGuesses < Game::MAX_GUESSES;
+	return numGuesses < Game::MAX_GUESSES;
 }
 
 /**
@@ -165,22 +171,22 @@ bool Game::play() {
 * his/her intent to end the game.
 */
 bool Game::getGuess(char& comparator, int& guess) const {
-string guessStr;
+string guessStr;
 	while(true) {
 		cout << getNumGuesses() + 1 << ". "
-		<< "Enter your guess using <, = or >, or enter Q to quit: ";
-		getline(cin, guessStr);
+		<< "Enter your guess using <, = or >, or enter Q to quit: ";
+		getline(cin, guessStr);
 		if (guessStr.length() == 0)
-			continue;
+			continue;
 		if (tolower(guessStr[0]) == 'q')
-			return false;
-		istringstream(guessStr) >>comparator >>guess;
+			return false;
+		istringstream(guessStr) >>comparator >>guess;
 		if (comparator == '<' || comparator == '>' || comparator == '=')
-			break;
+			break;
 		cerr <<"Invalid comparator. Here's an example guess: "
-		<<" < 12345\n";
+		<<" < 12345\n";
 	}
-return true;
+return true;
 }
 
 /**
@@ -190,15 +196,22 @@ return true;
 */
 void Game::updateLeaderboard(Player& player, int numGuesses) {
 	if (player.getMostGuesses() == INT_MAX || player.getMostGuesses() < numGuesses)
-		player.setMostGuesses(numGuesses);
+		player.setMostGuesses(numGuesses);
 	if (player.getLeastGuesses() == INT_MAX || player.getLeastGuesses() > numGuesses)
-		player.setLeastGuesses(numGuesses);
+		player.setLeastGuesses(numGuesses);
 	// The average is a bit tricky.
-	// TODO: Calculate and set the average in the player’s record
+	// DONE: Calculate and set the average in the player’s record
+	player.setAvgGuesses(numGuesses);
 	// Find the player in players[] and update their stats
-	Game::updatePlayer(player);
-	Game::sortLeaderboard();
-	cout <<"Current Leaderboard:\n";
-	// TODO: Print Leaderboard by using somethng like cout << ..... << player <<endl;
-	cout <<"End of Leaderboard.\n\n";
+	Game::updatePlayer(player);
+	Game::sortLeaderboard();
+	cout <<"Current Leaderboard:\n";
+	// DONE: Print Leaderboard by using somethng like cout << ..... << player <<endl;
+	for (int i = 0; i < Game::players[i].lenght(); i ++) {
+		cout << (os, Game::player[i]);
+	}
+	cout << 
+	cout <<"End of Leaderboard.\n\n";
 }
+
+#endif /* defined(__GuessIt_v1__Game__) */

@@ -90,45 +90,6 @@ int main () {
 	
 }
 
-int main () {
 
-	Queue queue;
-
-	/* LOOP TESTS */
-
-	for (int i = MAX_SIZE-1; i >= 0; i--) {         // Pushes values from 100 to 1
-		string myString = to_string(i);
-		queue.push(myString);
-	}
-
-	cout << endl;
-	cout << "Queue popped:" << endl << endl;
-
-	for (int i = 0; i < MAX_SIZE; i++) {         // should pop values in same order as pushed
-		cout << queue.pop() << " ";
-	}
-
-	cout << endl << endl << endl;
-
-	//USER INPUT TEST
-
-	while (true) {
-		cout << "push or pop: ";
-		getline(cin, userInput);
-		if (userInput == "pop") {
-			string out = queue.pop();
-			cout << out << endl;
-		}
-		else if (userInput == "push") {
-			cout << "Push what: ";
-			getline(cin, element);
-		    bool confirm = queue.push(element);
-		    if (!confirm)
-		    	cout << "Cannot push value (reached queue capacity";
-		}
-	}
-	
-	return 0;
-}
 
 
