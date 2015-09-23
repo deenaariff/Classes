@@ -8,6 +8,7 @@
 #include "Player.h"
 
 
+
 using namespace std;
 
 /**
@@ -57,6 +58,8 @@ void Player::setLeastGuesses(int guessesLow) {
 
 // Uses latest num Guesses to Calculate new Average
 void Player::setAvgGuesses(int numGuesses) {
+   if (numGuesses < 1)
+      avgGuesses = 0;
    avgGuesses = ((avgGuesses*numGamesPlayed)+numGuesses)/(numGamesPlayed+1);
 }
 

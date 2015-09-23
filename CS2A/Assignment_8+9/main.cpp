@@ -1,4 +1,4 @@
-//
+g//
 // main.cpp
 // GuessIt.v1
 //

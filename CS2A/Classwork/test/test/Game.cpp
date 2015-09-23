@@ -1,3 +1,4 @@
+
 // Game.cpp
 // GuessIt.v1
 //
@@ -27,7 +28,7 @@ Game::Game(string playerName) {
    hasBeenWon = false;
 }
 
-//­­­­­­­­­­­­­­­­­­­ Static methods ­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­
+//------------------------- Static methods ---------------------------------
 /**
  * Add the given player into our static array of Players. Return true if
  * successful and false on failure (if there are already MAX_PLAYERS players).
@@ -35,12 +36,12 @@ Game::Game(string playerName) {
  */
 bool Game::addPlayer(string playerName) {
    for (int i = 0; i < Game::MAX_PLAYERS; i++) {
-      if (players[i].getPlayerName().compare(playerName) == 0) {
+      if (Game::players[i].getPlayerName().compare(playerName) == 0) {
          return true; // Already existing player
       }
       else if (Game::players[i].getPlayerName().empty()) {
-         players[i] = Player();
-         players[i].setPlayerName(playerName);
+         Game::players[i] = Player();
+         Game::players[i].setPlayerName(playerName);
          ++Game::numPlayers;
          return true;
       }
@@ -56,9 +57,9 @@ bool Game::addPlayer(string playerName) {
  */
 bool Game::getPlayerAtRank(int i, Player& player) {
    // DONE Fill in the above function definition
-   // Comparator to sort array of Players by increasing average number of guesses
+   // Comparator to sort array of Players by increasing avg number of guesses
    if (Game::players[i].getPlayerName() == player.getPlayerName()) {
-      Game::players[i] = player;
+      Game::players[i] = player; // more efficient than updatePlayer()
       return true;
    }
    else
@@ -104,8 +105,8 @@ bool Game::findPlayer(string playerName, Player& player) {
  */
 bool Game::updatePlayer(Player& player) {
    // DONE Fill in this method’s body
-   for (int i = 0; i < MAX_PLAYERS; i++) {
-      if (Game::players[i].getPlayerName().compare(player.getPlayerName()) == 0) {
+   for (int i = 0; i < numPlayers; i++) {
+      if (Game::players[i].getPlayerName().compare(player.getPlayerName())==0){
          Game::players[i] = player;
          return true;
       }
@@ -129,7 +130,7 @@ bool Game::isWon(void) const {
    return hasBeenWon;
 }
 
-// ­­­­­­­­­­­­­­­­ Game playing logic ­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­
+// -------------------- Game playing logic ------------------------------
 /**
  * The Playing loop: The secret number has already been selected when the game
  * was instantiated. The logic simply loops over user guesses, providing
@@ -141,10 +142,10 @@ bool Game::isWon(void) const {
 bool Game::play() {
    char cmp;
    int guess;
-   cout <<"Welcome to the Foothill Number Guessing game, " <<currentPlayerName <<".\n"
-   <<"I have a non­negative number < "<< MAX_SECRET << " in mind\n"
-   <<"and you have to guess it using <, > or =\n\n";
-   cout << "\nSecretNum is: " << secretNumber << "\n";
+   cout << "Welcome to the Foothill Number Guessing game, "
+   << currentPlayerName <<".\n"
+   << "I have a non­negative number < "<< MAX_SECRET << " in mind\n"
+   << "and you have to guess it using <, > or =\n\n";
    while (numGuesses < Game::MAX_GUESSES && !hasBeenWon) {
       if (!getGuess(cmp, guess))
          return false;
@@ -190,26 +191,29 @@ bool Game::getGuess(char& comparator, int& guess) const {
 
 /**
  * Update the player record for the number of guesses used up in this game, and
- * update the corresponding values in the Game leaderboard. After updating values
- * print the current leaderboard.
+ * update the corresponding values in the Game leaderboard.
+ * print the current leaderboard after updating values.
  */
 void Game::updateLeaderboard(Player& player, int numGuesses) {
-   if (player.getMostGuesses() == INT_MAX || player.getMostGuesses() < numGuesses)
+   if (player.getMostGuesses()== INT_MAX ||
+   player.getMostGuesses()< numGuesses)
       player.setMostGuesses(numGuesses);
-   if (player.getLeastGuesses() == INT_MAX || player.getLeastGuesses() > numGuesses)
+   if (player.getLeastGuesses()== INT_MAX ||
+   player.getLeastGuesses() >numGuesses)
       player.setLeastGuesses(numGuesses);
    // The average is a bit tricky.
    // DONE: Calculate and set the average in the player’s record
    int numGames = player.getNumGamesPlayed();
-   player.setNumGamesPlayed(++numGames);
    player.setAvgGuesses(numGuesses);
+   player.setNumGamesPlayed(++numGames);
    // Find the player in players[] and update their stats
    updatePlayer(player);
    sortLeaderboard();
    cout <<"Current Leaderboard:\n\n";
-   // DONE: Print Leaderboard by using somethng like cout << ..... << player <<endl;
+   // DONE: Print Leaderboard by using somethng like cout << ..... << player
    for (int i = 0; i < getNumPlayers(); i++) {
-      cout << "Rank " << i + 1 << ": " << players[i] << endl;
+      int rankVal = i + 1;
+      cout << "Rank " << rankVal << ": " << players[i] << endl;
    }
    cout << endl;
    cout <<"End of Leaderboard.\n\n";

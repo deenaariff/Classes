@@ -1,4 +1,3 @@
-//
 // main.cpp
 // GuessIt.v1
 //
@@ -28,14 +27,15 @@ int main(int argc, const char * argv[]) {
       if (playerName.compare("Q") == 0 || playerName.compare("q") == 0)
          break;
       if (!Game::addPlayer(playerName)) {
-         cerr <<"Sorry. No more new players. Only accepting known players.\n";
+         cerr << "Sorry. No more new players. Only accepting known players.\n";
          continue;
       }
       Player player;
       player.setPlayerName(playerName);
       if (!Game::findPlayer(playerName, player)) {
-         cerr <<"Sorry! Something's wrong. I can't find a player who ought to exist!\n"
-         <<"We'll look into this, I promise\n";
+         cerr << "Something's wrong! I can't find a player"
+         <<  "who ought to exist!\n"
+         << "We'll look into this, I promise\n";
          continue;
       }
       // At this point the player exists and we hold his/her record in the
@@ -49,12 +49,12 @@ int main(int argc, const char * argv[]) {
          Game::updateLeaderboard(player, game.getNumGuesses());
       } else {
          cout <<"I'm sorry, " << game.getPlayerName() << ". "
-         <<"You did not win the game after " << game.getNumGuesses()
-         <<(game.getNumGuesses() > 1? " guesses.\n" : " guess.\n");
+         << "You did not win the game after " << game.getNumGuesses()
+         << (game.getNumGuesses() > 1? " guesses.\n" : " guess.\n");
          Game::updateLeaderboard(player, Game::MAX_GUESSES);
       }
    }
-   cout <<"Bye!\n";
+   cout << "Bye!\n";
    return 0;
 }
 

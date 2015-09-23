@@ -23,7 +23,7 @@ using namespace std;
 class Game {
 public:
    static const int MAX_GUESSES = 50;
-   static const int MAX_PLAYERS = 10;
+   static const int MAX_PLAYERS = 3;
    static const long MAX_SECRET = 1000000;
    static Player players[MAX_PLAYERS];
 
