@@ -121,7 +121,6 @@ bool hasElement(SET *sp, char *elt) {
 	return found;
 };
 
-
 // If element is not found, add element
 bool addElement(SET *sp, char *elt){
 	bool found; 
@@ -148,16 +147,13 @@ bool removeElement(SET *sp, char *elt){
 	bool found; 
 	// find index by calling findElement
 	int index = findElement(sp, elt, &found);
-	// if element exists return false
-	if (found == true) 
+	// if element does not exist return false
+	if (found == false) 
 		return false;
 	else {
-        // set index to NULL
-		sp->words[index] = NULL;
-        // printf("Setting %d to true\n", index);
-        // Set value to filled 
+        // Set value to previously filled 
 		sp->status[index] = 'P';
-		// increment count
+		// decrement count
 		sp->count--;
 		return true;
 	}
