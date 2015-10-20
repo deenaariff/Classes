@@ -1,3 +1,9 @@
+// Name: Deen Aariff
+// Student ID: W1103023
+// Assignment: #2 Sets and Array
+// Class: COEN 12L T 2:15-500
+// Date: 10/11/15
+
 #include<stdio.h>
 #include<stdlib.h>
 #include <stdbool.h>
@@ -72,13 +78,16 @@ bool hasElement (SET *sp, char *elt) {
 
 // Add element to set 
 bool addElement (SET *sp, char *elt) {
+    // make sp isn't NULL
     assert(sp != NULL || sp->words != 0);
     if (hasElement(sp, elt) == true) {
 	return false;
     }
+    // check for max elements
     if (sp -> count > sp -> len) {
 	return false;
     }
+    // allocate string from buffer
     elt=strdup(elt);
     sp -> words[sp->count] = elt;
     sp -> count++; 

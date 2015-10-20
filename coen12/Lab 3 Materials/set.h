@@ -1,7 +1,3 @@
-// Name: Deen Aariff
-// Assignment: #2 Sets and Arrays
-// Class: COEN 12L T 2:15-5:00
-
 /*
  * File:        set.h
  *
