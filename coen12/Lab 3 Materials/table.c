@@ -1,3 +1,9 @@
+// Name: Deen Aariff
+// Student ID: W1103023
+// Assignment: #3 Sets, Arrays, and Hash Tables
+// Class: COEN 12L T 2:15-5:00
+// Date: 10/25/15
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
@@ -42,11 +48,13 @@ void destroySet (SET *sp) {
 		free(sp->words[i]);
 	}
 	// free sp->words 
+	assert(sp->words != NULL);
 	free(sp->words);
 	// free sp 
 	free(sp);
 }
 
+// Return number of elements in string
 int numElements(SET *sp) {
 	return sp->count;
 };
@@ -56,9 +64,8 @@ unsigned hashString(char *s) {
 	unsigned hash = 0;
 	// While not end of string 
  	while (*s != '\0')
- 		// unique hash valuefrom string
+ 		// unique hash value from string
  		hash = 31 * hash + *s ++;
-    //printf("%c Calculated Hash Value: %d\n", *s, hash);
  	return hash;
 }
 
@@ -71,7 +78,6 @@ static int findElement (SET *sp, char *elt, bool *found) {
 	int store;
 	// Whether previously filled value encountered
 	bool foundStore = false; 
-	//printf("Entering loop");
 	while(hash <= sp->len) {
 		// If value is empty then return index
 		if (sp->status[hash] == 'E') {
@@ -80,13 +86,11 @@ static int findElement (SET *sp, char *elt, bool *found) {
 				// return first perviously dleted value
 				return store;
 			*found = false;
-            //printf("%d is NULL\n", hash);
 			return hash;
 		}
 		// If value is continue probe
 		else if(sp->status[hash] == 'F') {
 			// If filled value is value searching for return
-            //printf("Found filled element\n");
 			if(strcmp(elt,sp->words[hash]) == 0) {
 				// set found to true
 				*found = true;
@@ -97,7 +101,6 @@ static int findElement (SET *sp, char *elt, bool *found) {
 		}
 		// If value is previously filled then continue probe
 		else if(sp->status[hash] == 'P') {
-			hash++;
 			// if first previously delted value
 			if (foundStore == false) {
 				// Store index of first previously delted value
@@ -105,6 +108,7 @@ static int findElement (SET *sp, char *elt, bool *found) {
 				// set found to true
 				foundStore = true;
 			}
+			hash++;
 		}
 	}
 	// set found to false
@@ -125,17 +129,17 @@ bool hasElement(SET *sp, char *elt) {
 bool addElement(SET *sp, char *elt){
 	bool found; 
 	// find index by calling findElement
+	assert(sp != NULL || sp->words != 0);
 	int index = findElement(sp, elt, &found);
 	// if element exists return false
 	if (found == true) 
 		return false;
 	else {
 		// assign value for elt
-        elt = strdup(elt);
-        // set index to elt
+        	elt = strdup(elt);
+        	// set index to elt
 		sp->words[index] = elt;
-        //printf("Setting %d to true\n", index);
-        // Set value to filled 
+        	// Set value to filled 
 		sp->status[index] = 'F';
 		// increment count
 		sp->count++;
@@ -143,7 +147,8 @@ bool addElement(SET *sp, char *elt){
 	}
 };
 
-bool removeElement(SET *sp, char *elt){
+// Remove element in Data Set
+bool removeElement(SET *sp, char *elt) {
 	bool found; 
 	// find index by calling findElement
 	int index = findElement(sp, elt, &found);
