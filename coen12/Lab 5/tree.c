@@ -20,7 +20,7 @@ struct tree {
 // Determines which side of parent tree is on
 // sets to null
 // O(1)
-void detach (struct tree *root) {
+void freeChild (struct tree *root) {
 	if (root -> parent == NULL) {
 		return;
 	}
@@ -47,13 +47,13 @@ struct tree* createTree(int data, struct tree* left, struct tree* right) {
 	// ensure left is not element of another tree
 	if (left != NULL)
 	{
-		detach(left);
+		freeChild(left);
 		left -> parent = root;
 	}
 	// ensure righ tis not element of anotehr tree
 	if (root -> right != NULL)
 	{
-		detach(right);
+		freeChild(right);
 		right -> parent = root;
 	}
 	return (root);
@@ -108,7 +108,7 @@ void setLeft(struct tree *root, struct tree *left) {
 	}
 	// if not null ensure not part of another tree
 	if (root -> left != NULL) {
-		detach (left);
+		freeChild (left);
 	}
 	// set pointers
 	root -> left = left;
@@ -126,7 +126,7 @@ void setRight(struct tree *root, struct tree *right) {
 	}
 	// if not null ensure not part of anotehr tree
 	if (root -> right != NULL) {
-		detach (right);
+		freeChild (right);
 	}
 	// set pointers
 	root -> right = right;

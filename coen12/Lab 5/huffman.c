@@ -93,10 +93,10 @@ void binary (TREE *node) {
     binary(node -> parent);
     // if left node then print 1
     if (getLeft(node -> parent) == node)
-        printf("1");
+        printf("0");
     // if right node then print 0
     else 
-        printf("0");
+        printf("1");
 }
 
 
